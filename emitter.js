@@ -29,11 +29,11 @@ function getEmitter() {
         },
 
         emit: function (event) {
-            var eventList = event.split('.');
+            let eventList = event.split('.');
             while (eventList.length > 0) {
-                event = eventList.join('.');
-                if (sub[event]) {
-                    sub[event].forEach(element => element.handler.call(element.context));
+                let newEvent = eventList.join('.');
+                if (sub[newEvent]) {
+                    sub[newEvent].forEach(element => element.handler.call(element.context));
                 }
                 eventList.pop();
             }
