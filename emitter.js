@@ -8,7 +8,7 @@ function getEmitter() {
 
     return {
         on: function (event, context, handler) {
-            if (!sub.hasOwnProperty(event)) {
+            if (!(event in sub)) {
                 sub[event] = [];
             }
             sub[event].push({
@@ -30,7 +30,7 @@ function getEmitter() {
 
         emit: function (event) {
             let eventList = event.split('.');
-            while (eventList.length > 0) {
+            while (eventList.length) {
                 let newEvent = eventList.join('.');
                 if (sub[newEvent]) {
                     sub[newEvent].forEach(element => element.handler.call(element.context));
